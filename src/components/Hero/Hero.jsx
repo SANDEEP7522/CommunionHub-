@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col items-center text-center">
+    <section className="flex flex-col items-center text-center mt-[5rem]">
       {/* Header Section */}
       <div className="mb-6">
         <h1 className="text-6xl md:text-6xl  font-bold">Connect Communities</h1>

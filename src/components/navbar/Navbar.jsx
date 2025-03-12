@@ -13,7 +13,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="p-4 bg-white shadow-md">
+    <nav className="p-4 bg-white shadow-md fixed top-0 left-0 w-full z-50">
       <div className="flex items-center justify-between max-w-6xl mx-auto">
         {/* Logo Section */}
         <div className="text-2xl font-bold text-blue-500">
@@ -21,7 +21,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6 text-gray-800 font-medium">
+        <div className="hidden md:flex items-center space-x-10 text-gray-800 font-medium">
           <Link to="/" className="hover:text-blue-600">
             Home
           </Link>
