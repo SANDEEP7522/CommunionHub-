@@ -1,11 +1,14 @@
-import React from 'react'
+import CreateEventForm from "@/components/Event/CreateEventForm";
+import Header from "@/components/Event/Header";
+import React from "react";
 
 function AddEvent() {
   return (
     <div>
-      Add Events
+      <Header />
+      <CreateEventForm />
     </div>
-  )
+  );
 }
 
-export default AddEvent
+export default AddEvent;
