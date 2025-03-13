@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -19,7 +20,6 @@ export default function Header() {
           your audience and ensure everything is set for a successful launch.
         </p>
 
-        {/* Trust Badge */}
         <div className="flex justify-center items-center gap-4 mt-6">
           <div className="flex -space-x-2">
             <img
@@ -58,12 +58,15 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Explore Events Button */}
-        <motion.div className="mt-6" whileHover={{ scale: 1.05 }}>
-          <Button className="bg-gray-900 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-gray-800">
-            Explore Events <ArrowRight size={18} />
-          </Button>
-        </motion.div>
+        <Link
+           to="/events"
+        >
+          <motion.div className="mt-6" whileHover={{ scale: 1.05 }}>
+            <Button className="bg-gray-900 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-gray-800">
+              Explore Events <ArrowRight size={18} />
+            </Button>
+          </motion.div>
+        </Link>
       </section>
     </div>
   );

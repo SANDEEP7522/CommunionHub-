@@ -6,7 +6,9 @@ const Hero = () => {
     <section className="flex flex-col items-center text-center mt-[5rem]">
       {/* Header Section */}
       <div className="mb-6">
-        <h1 className="text-6xl md:text-6xl  font-bold">Connect Communities</h1>
+        <h1 className="text-6xl md:text-6xl  font-bold">
+          Welcome to Connect Communities
+        </h1>
         <p className="text-gray-600 mt-2 text-sm md:text-lg">
           Bridging gaps between faiths with tech and a dash of fun!
         </p>
@@ -20,6 +22,20 @@ const Hero = () => {
         <span className="text-sm md:text-lg font-semibold">
           ✅ Unlimited Advantages
         </span>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="fixed items-center justify-center mt-[11rem]  z-50" // Fixed positioning with high z-index
+      >
+        <Link
+          to="/events"
+          className="bg-black text-white px-4 py-2 md:px-6 md:py-3 rounded-lg 
+                   hover:bg-gray-800 transition transform hover:scale-105"
+        >
+          Redirect Event Page
+        </Link>
       </motion.div>
 
       <div className="flex justify-center items-center text-center p-6 md:p-10 relativ">

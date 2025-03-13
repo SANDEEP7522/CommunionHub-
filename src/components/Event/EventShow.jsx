@@ -15,10 +15,10 @@ const EventShow = () => {
   const fetchEvents = async () => {
     try {
       const response = await axios.get("/api/events");
-      console.log("Full Response:", response.data);
+      // console.log("Full Response:", response.data);
 
       const events = response.data?.data || [];
-      console.log("Events:", events);
+      // console.log("Events:", events);
 
       setEventList(events);
       setFilteredEvents(events);
