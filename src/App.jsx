@@ -8,6 +8,7 @@ import AddEvent from './Pages/Events/AddEvent/AddEvent';
 import Leaders from './Pages/Leaders/Leaders';
 import Support from './Pages/Support/Support';
 import Communion from './components/Communion/Communion';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/leaders" element={<Leaders />} />
           <Route path="/support" element={<Support />} />
         </Routes>
+        <Footer />
     </BrowserRouter>
   );
 }

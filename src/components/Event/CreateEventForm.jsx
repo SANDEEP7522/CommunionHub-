@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "@/assets/urlCofig";
 
 export default function CreateEventForm() {
   const [formData, setFormData] = useState({
@@ -29,9 +32,45 @@ export default function CreateEventForm() {
     setFormData({ ...formData, eventImage: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData); // Replace with API call
+
+    const formDataToSend = new FormData();
+    for (const [key, value] of Object.entries(formData)) {
+      if (key === "eventImage" && value) {
+        formDataToSend.append(key, value);
+      } else {
+        formDataToSend.append(key, value);
+      }
+    }
+
+    try {
+      const response = await axios.post("/api/create", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.data.success) {
+        toast.success("Event created successfully!");
+        setFormData({
+          title: "",
+          format: "",
+          startDateTime: "",
+          endDateTime: "",
+          timezone: "",
+          location: "",
+          eventType: "",
+          capacity: "",
+          description: "",
+          visibility: "",
+          eventImage: null,
+        });
+      }
+    } catch (error) {
+      toast.error("Failed to create event. Please try again!");
+      console.error("Error creating event:", error);
+    }
   };
 
   return (
@@ -41,11 +80,12 @@ export default function CreateEventForm() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <ToastContainer position="top-right" autoClose={3000} />
+
       <form
-        className="max-w-3xl mx-auto p-8 bg-white dark:bg-gray-900 shadow-lg rounded-xl mt-[-8rem] border border-gray-200 dark:border-gray-700"
+        className="max-w-3xl mx-auto p-8 bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-200 dark:border-gray-700"
         onSubmit={handleSubmit}
       >
-        {/* Title */}
         <div>
           <Label htmlFor="title">Event Title*</Label>
           <Input
@@ -54,11 +94,11 @@ export default function CreateEventForm() {
             required
             className="mt-1"
             onChange={handleChange}
+            value={formData.title}
           />
         </div>
 
-        {/* Format & Type */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4  ">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="format">Event Format*</Label>
             <select
@@ -66,6 +106,7 @@ export default function CreateEventForm() {
               className="mt-1 w-full p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
               required
               onChange={handleChange}
+              value={formData.format}
             >
               <option value="">Select format</option>
               <option value="Online">Online</option>
@@ -80,6 +121,7 @@ export default function CreateEventForm() {
               className="mt-1 w-full p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
               required
               onChange={handleChange}
+              value={formData.eventType}
             >
               <option value="">Select type</option>
               <option value="Free">Free</option>
@@ -88,7 +130,6 @@ export default function CreateEventForm() {
           </div>
         </div>
 
-        {/* Start & End Date */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label>Start Date & Time*</Label>
@@ -98,6 +139,7 @@ export default function CreateEventForm() {
               required
               className="mt-1"
               onChange={handleChange}
+              value={formData.startDateTime}
             />
           </div>
           <div>
@@ -108,11 +150,11 @@ export default function CreateEventForm() {
               required
               className="mt-1"
               onChange={handleChange}
+              value={formData.endDateTime}
             />
           </div>
         </div>
 
-        {/* Timezone & Location */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label>Timezone*</Label>
@@ -122,6 +164,7 @@ export default function CreateEventForm() {
               required
               className="mt-1"
               onChange={handleChange}
+              value={formData.timezone}
             />
           </div>
           <div>
@@ -132,11 +175,11 @@ export default function CreateEventForm() {
               required
               className="mt-1"
               onChange={handleChange}
+              value={formData.location}
             />
           </div>
         </div>
 
-        {/* Capacity & Visibility */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label>Capacity (Optional)</Label>
@@ -146,6 +189,7 @@ export default function CreateEventForm() {
               placeholder="Enter capacity"
               className="mt-1"
               onChange={handleChange}
+              value={formData.capacity}
             />
           </div>
 
@@ -156,6 +200,7 @@ export default function CreateEventForm() {
               className="mt-1 w-full p-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
               required
               onChange={handleChange}
+              value={formData.visibility}
             >
               <option value="">Select visibility</option>
               <option value="Public">Public</option>
@@ -164,7 +209,6 @@ export default function CreateEventForm() {
           </div>
         </div>
 
-        {/* Description */}
         <div>
           <Label>Description*</Label>
           <Textarea
@@ -173,10 +217,10 @@ export default function CreateEventForm() {
             required
             className="mt-1"
             onChange={handleChange}
+            value={formData.description}
           />
         </div>
 
-        {/* Event Image Upload */}
         <div>
           <Label>Event Image*</Label>
           <Input
@@ -188,11 +232,10 @@ export default function CreateEventForm() {
           />
         </div>
 
-        {/* Submit Button */}
         <motion.div whileHover={{ scale: 1.05 }}>
           <Button
             type="submit"
-            className="w-full py-2 bg-blue-600 text-white font-medium rounded-md shadow-md hover:bg-blue-700 transition-all"
+            className="w-full py-2 bg-blue-600 text-white font-medium rounded-md shadow-md hover:bg-blue-700 transition-all mt-5"
           >
             Create Event
           </Button>

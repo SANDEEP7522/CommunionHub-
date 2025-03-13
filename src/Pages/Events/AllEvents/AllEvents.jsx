@@ -1,11 +1,12 @@
-import React from 'react'
+import EventShow from "@/components/Event/EventShow";
+import React from "react";
 
 function AllEvents() {
   return (
     <div>
-      All Events
+      <EventShow />
     </div>
-  )
+  );
 }
 
-export default AllEvents
+export default AllEvents;
