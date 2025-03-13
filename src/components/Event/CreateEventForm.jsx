@@ -75,7 +75,7 @@ export default function CreateEventForm() {
 
   return (
     <motion.div
-      className="max-w-6xl mx-auto p-8 bg-white dark:bg-gray-900 shadow-lg rounded-xl mt-[-8rem]"
+      className="max-w-6xl mx-auto p-8 bg-white dark:bg-gray-900 shadow-lg rounded-xl mt-[-12rem]"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -83,7 +83,7 @@ export default function CreateEventForm() {
       <ToastContainer position="top-right" autoClose={3000} />
 
       <form
-        className="max-w-3xl mx-auto p-8 bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-200 dark:border-gray-700"
+        className="max-w-3xl mx-auto p-8 bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-200 dark:border-gray-700 mt-[-5rem]"
         onSubmit={handleSubmit}
       >
         <div>
