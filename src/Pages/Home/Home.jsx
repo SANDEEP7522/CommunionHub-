@@ -1,6 +1,7 @@
 import Communion from '@/components/Communion/Communion'
 import Hero from '@/components/Hero/Hero'
 import JoinConversation from '@/components/JoinConversation/JoinConversation'
+import MomentsConnection from '@/components/JoinConversation/MomentsConnection'
 import React from 'react'
 
 function Home() {
@@ -9,6 +10,7 @@ function Home() {
       <Hero />
       <Communion />
       <JoinConversation />
+      <MomentsConnection />
     </div>
   )
 }
